@@ -1,4 +1,4 @@
-import pygame, sys, glob
+import pygame, sys, glob, os
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -72,6 +72,8 @@ if __name__ == "__main__":
     if lower < upper:
         lower, upper = upper, lower
 
+    if not os.path.exists("out"):
+        os.makedirs("out")
     for filename in filelist:
         im = Image.open(filename)
         filename = filename.split('/')
