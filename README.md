@@ -1,10 +1,10 @@
 # gif-animator
 
-
-##copy all your image into <pre><code>/img
+###copy all your image into
+<pre><code>/img
 </code></pre>
 
-###resize it
+###resize images
 <pre><code>mogrify -resize 50% \*.png
 </code></pre>
 
