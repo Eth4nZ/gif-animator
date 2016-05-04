@@ -1,5 +1,7 @@
 import pygame, sys, glob
 from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
 pygame.init()
 
 def displayImage(screen, px, topleft, prior):
@@ -56,7 +58,7 @@ def mainLoop(screen, px):
     return ( topleft + bottomright )
 
 if __name__ == "__main__":
-    filelist = glob.glob('*.png')
+    filelist = glob.glob('img/*.png')
     if len(filelist) == 0:
         print ('Not found any *.png file')
     else:
@@ -72,6 +74,17 @@ if __name__ == "__main__":
 
     for filename in filelist:
         im = Image.open(filename)
+        filename = filename.split('/')
+        filename = filename[1]
         im = im.crop((left, upper, right, lower))
+        draw = ImageDraw.Draw(im)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf", 24)
+        #Screenshot from 2016-04-22 00-03-07-80.png
+        tempstring = filename.split(".")
+        tempstring = tempstring[0].split(" ");
+        text = tempstring[2] + ' ' + tempstring[3]
+        tcolor = (255, 0, 0)
+        draw.text((100, 100), text, fill = tcolor, font = font)
+        del draw
         pygame.display.quit()
-        im.save('_' + filename)
+        im.save('out/' + filename)
